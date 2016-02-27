@@ -7,10 +7,19 @@ interface Expr
 class Num(val value: Int) : Expr
 class Sum(val left: Expr, val right: Expr) : Expr
 
+//if (expr instanceof Num) {
+//    return ((Num) expr).getValue();
+//}
+//if (expr instanceof Sum) {
+//    Sum sum = (Sum) expr;
+//    return eval(sum.getLeft()) + eval(sum.getRight());
+//}
+//throw new IllegalArgumentException("Unknown expression");
+
 fun eval(e: Expr): Int =
         when (e) {
-            is Num -> todoTask8(e)
-            is Sum -> todoTask8(e)
+            is Num -> e.value
+            is Sum -> eval(e.left) + eval(e.right)
             else -> throw IllegalArgumentException("Unknown expression")
         }
 
